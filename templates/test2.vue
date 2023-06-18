@@ -1,0 +1,1 @@
+<div :data-title="session.title">{{session.title}}</div>
