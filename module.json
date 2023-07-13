@@ -1,6 +1,6 @@
 {
-	"id": "mouses-module-template",
-	"title": "MODULE TITLE",
+	"id": "window-tabs",
+	"title": "Window Tabs",
 	"description": "MODULE DESCRIPTION",
 	"version": "1.0.0",
 	"compatibility": {
@@ -33,7 +33,18 @@
 		"requires": [],
 		"recommneds": [],
 		"optional": [],
-		"conflicts": [],
+		"conflicts": [{
+			"id": "window-controls",
+			"type": "module",
+			"manifest": "https://github.com/saif-ellafi/foundryvtt-window-controls/releases/latest/module.json",
+			"compatibility": {},
+			"reason": "Windows Controls and Windows Tabs are incompatible as the two modules don't properly recognize each other. May fix this later if I can figure out how to do it."
+		},{
+			"id": "foundry-taskbar",
+			"type": "module",
+			"compatibility": {},
+			"reason": "Taskbar and Windows Tabs are incompatible as the two modules don't properly recognize each other. May fix this later if I can figure out how to do it."
+		}],
 		"flags": {
 			"optional": []
 		}
@@ -51,8 +62,8 @@
 	"media": [
 		{
 		  "type": "setup",
-		  "url": "modules/mouses-module-template/assets/logo.gif",
-		  "thumbnail": "modules/mouses-module-template/assets/logo.gif"
+		  "url": "modules/window-tabs/assets/logo.png",
+		  "thumbnail": "modules/window-tabs/assets/logo.png"
 		}
 	],
 	"url": "This is auto replaced",

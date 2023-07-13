@@ -1,5 +1,19 @@
 {
-	"mouses-module-template": {
-		"title": "Module Template"
+	"window-tabs": {
+		"title": "Module Template",
+		"settings": {
+			"cleanHeaderButtons": {
+				"name": "Simple Header Buttons",
+				"hint": "Remove text from header buttons when possible to provide a cleaner look."
+			},
+			"dockWhenMinimized": {
+				"name": "Dock When Minimized",
+				"hint": "Dock the window when minimized instead of just collapsing on the screen."
+			},
+			"allowMaximize": {
+				"name": "Allow Maximize Button",
+				"hint": "When enabled the user will be allowed to maximize the window to take up as much space as possible. WARNING: This may cause issues with some windows."
+			}
+		}
 	}
 }

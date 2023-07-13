@@ -1,13 +1,13 @@
 export class MODULE {
 	// Get Package ID
-	static ID = 'mouses-module-template';
+	static ID = 'window-tabs';
 
 	// Get Localized Title, Defaults to English if i18n is not ready
-	static TITLE = "MODULE TITLE";
+	static TITLE = "Window Tabs";
 
 	// Set Package Options
 	static OPTIONS = {
-		background: '#42b883',
+		background: '#00adef',
 		color: '#fff'
 	}
 

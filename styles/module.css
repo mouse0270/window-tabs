@@ -1,0 +1,512 @@
+.window-tabs-app {
+  /* Add Support for Minimized Windows */
+  /* Add Support for Maximized Windows */
+  /* Add Support for Clean Header Buttons */
+}
+.window-tabs-app > header.window-header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 60px;
+          flex: 0 0 60px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  position: relative;
+}
+.window-tabs-app > header.window-header h4.window-title {
+  font-size: 0rem;
+}
+.window-tabs-app > header.window-header a.header-button {
+  height: 30px;
+}
+.window-tabs-app > header.window-header .window-tabs {
+  bottom: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 30px;
+  left: 0px;
+  overflow-x: overlay;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}
+.window-tabs-app > header.window-header .window-tabs::-webkit-scrollbar {
+  height: 0px;
+}
+.window-tabs-app > header.window-header .window-tabs a.window-tabs--tab {
+  cursor: pointer;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto; /* Allow resizing of tabs */
+  margin: 0px;
+  max-width: 210px;
+  overflow: hidden;
+  padding: 0 0.75rem;
+  padding-right: 30px;
+  pointer-events: all;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.window-tabs-app > header.window-header .window-tabs a.window-tabs--tab a.close {
+  margin: 0px;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  width: 30px;
+}
+.window-tabs-app > header.window-header .window-tabs a.window-tabs--tab:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 3px 3px 0 0;
+  text-shadow: none;
+}
+.window-tabs-app > header.window-header .window-tabs a.window-tabs--tab.active {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 3px 3px 0 0;
+}
+.window-tabs-app.minimized > header.window-header h4.window-title {
+  font-size: var(--font-size-14);
+}
+.window-tabs-app:has(.window-content .windows .app:only-child) > header.window-header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 35px;
+          flex: 0 0 35px;
+}
+.window-tabs-app > section.window-content {
+  background-image: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 0px;
+}
+.window-tabs-app > section.window-content .windows {
+  overflow: hidden;
+  /*display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;*/
+}
+.window-tabs-app > section.window-content .windows > .window-app {
+  background-color: transparent;
+  background-image: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  grid-area: 1/1/2/2;
+  /* OVERRIDE WINDOW POSITION */
+  height: 100% !important;
+  left: 0px !important;
+  margin: 0px;
+  position: relative !important;
+  top: 0px !important;
+  width: 100% !important;
+  /* FIX DND5E.SHEET.ITEM */
+}
+.window-tabs-app > section.window-content .windows > .window-app header.window-header {
+  display: none;
+}
+.window-tabs-app > section.window-content .windows > .window-app .window-resizable-handle {
+  display: none;
+}
+.window-tabs-app > section.window-content .windows > .window-app.dnd5e.sheet.item {
+  max-height: 100%;
+}
+.window-tabs-app .window-resizable-handle {
+  z-index: 200;
+}
+.window-tabs-app.minimized {
+  height: 30px !important;
+}
+.window-tabs-app.minimized > header.window-header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 30px;
+          flex: 0 0 30px;
+}
+.window-tabs-app.minimized > header.window-header h4.window-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.window-tabs-app.minimized > header.window-header a.header-button.maximize {
+  display: none !important;
+}
+.window-tabs-app.maximized:not(.minimized) {
+  border-radius: 0px;
+  height: 100vw !important;
+  left: 0px !important;
+  margin: 0;
+  width: calc(100vw - var(--sidebar-width) - 10px) !important;
+  top: 0px !important;
+}
+.window-tabs-app.maximized:not(.minimized) > header.window-header a.header-button.maximize i:before {
+  content: "\f2d2";
+}
+.window-tabs-app.maximized:not(.minimized) > header.window-header a.header-button.close:hover {
+  border-radius: 0px;
+}
+.window-tabs-app.maximized:not(.minimized) .window-resizable-handle {
+  display: none !important;
+}
+.window-tabs-app.clean-header-buttons > header.window-header {
+  padding-right: 0px;
+}
+.window-tabs-app.clean-header-buttons > header.window-header a.header-button {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0px;
+  min-width: 40px;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+.window-tabs-app.clean-header-buttons > header.window-header a.header-button:has(i) {
+  font-size: 0rem;
+  padding: 0;
+}
+.window-tabs-app.clean-header-buttons > header.window-header a.header-button:has(i) i {
+  font-size: var(--font-size-14);
+  margin: 0px;
+}
+.window-tabs-app.clean-header-buttons > header.window-header a.header-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  text-shadow: none;
+}
+.window-tabs-app.clean-header-buttons > header.window-header a.header-button.close:hover {
+  background-color: rgb(196, 43, 28);
+  border-top-right-radius: 5px;
+}
+
+body:has(#sidebar.collapsed) .window-tabs-app.maximized {
+  --sidebar-width: 32px;
+}
+
+/* Allow Maximize Button */
+.window-tabs-app > header.window-header a.header-button.maximize {
+  display: none;
+}
+
+.window-tabs-allow-maximize .window-tabs-app > header.window-header a.header-button.maximize {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* Add Dock Support */
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized] {
+  top: calc(100vh - var(--macro-size) - 20px - 30px) !important;
+  left: calc(var(--players-width) + 30px) !important;
+  width: 100% !important;
+  max-width: min(200px, var(--window-tabs-minimize-size));
+  min-width: min(200px, var(--window-tabs-minimize-size)) !important;
+  min-height: 30px !important;
+  /*max-width: min(200px, (100vw - var(--players-width) - var(--sidebar-width)) / 8);*/
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="1"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (1 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="2"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (2 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="3"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (3 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="4"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (4 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="5"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (5 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="6"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (6 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="7"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (7 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="8"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (8 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="9"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (9 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="10"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (10 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="11"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (11 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="12"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (12 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="13"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (13 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="14"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (14 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="15"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (15 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="16"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (16 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="17"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (17 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="18"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (18 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="19"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (19 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="20"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (20 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="21"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (21 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="22"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (22 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="23"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (23 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="24"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (24 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="25"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (25 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="26"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (26 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="27"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (27 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="28"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (28 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="29"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (29 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="30"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (30 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="31"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (31 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="32"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (32 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="33"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (33 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="34"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (34 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="35"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (35 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="36"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (36 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="37"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (37 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="38"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (38 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="39"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (39 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="40"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (40 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="41"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (41 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="42"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (42 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="43"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (43 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="44"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (44 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="45"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (45 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="46"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (46 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="47"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (47 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="48"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (48 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="49"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (49 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="50"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (50 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="51"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (51 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="52"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (52 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="53"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (53 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="54"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (54 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="55"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (55 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="56"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (56 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="57"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (57 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="58"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (58 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="59"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (59 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="60"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (60 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="61"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (61 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="62"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (62 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="63"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (63 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="64"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (64 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="65"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (65 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="66"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (66 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="67"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (67 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="68"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (68 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="69"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (69 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="70"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (70 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="71"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (71 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="72"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (72 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="73"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (73 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="74"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (74 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="75"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (75 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="76"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (76 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="77"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (77 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="78"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (78 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="79"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (79 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="80"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (80 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="81"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (81 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="82"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (82 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="83"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (83 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="84"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (84 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="85"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (85 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="86"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (86 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="87"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (87 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="88"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (88 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="89"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (89 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="90"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (90 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="91"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (91 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="92"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (92 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="93"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (93 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="94"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (94 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="95"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (95 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="96"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (96 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="97"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (97 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="98"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (98 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="99"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (99 - 1)) !important;
+}
+.window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="100"] {
+  left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (100 - 1)) !important;
+}

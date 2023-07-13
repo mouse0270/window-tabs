@@ -1,3 +1,243 @@
-.app {
-	background-image: none !important;
+.window-tabs-app {
+	> header.window-header {
+		flex: 0 0 60px;
+		justify-content: flex-end;
+		position: relative;
+
+		h4.window-title {
+			font-size: 0rem;
+		}
+
+		a.header-button {
+			height: 30px;
+		}
+
+		.window-tabs {
+			bottom: 0px;
+			display: flex;
+			height: 30px;
+			left: 0px;
+			overflow-x: overlay;
+			pointer-events: none;
+			position: absolute;
+    		width: 100%;
+
+			&::-webkit-scrollbar {
+				height: 0px;
+			}
+
+			a.window-tabs--tab {
+				cursor: pointer;
+				flex: 1 0 auto; /* Allow resizing of tabs */
+				margin: 0px;
+				max-width: 210px;
+				overflow: hidden;
+				padding: 0 0.75rem;
+				padding-right: 30px;
+				pointer-events: all;
+				position: relative;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+
+				a.close {
+					margin: 0px;
+					position: absolute;
+					right: 0px;
+					text-align: center;
+					width: 30px;
+				}
+
+				&:hover {
+					background-color: rgba(255 255 255 / 5%);
+					border-radius: 3px 3px 0 0;
+					text-shadow: none;
+				}
+				
+				&.active {
+					background-color: rgba(0 0 0 / 25%);
+					border-radius: 3px 3px 0 0;
+				}
+			}
+		}
+	}
+
+	&.minimized {
+		> header.window-header h4.window-title {
+			font-size: var(--font-size-14);
+		}
+	}
+
+	&:has(.window-content .windows .app:only-child) {
+		> header.window-header {
+			flex: 0 0 35px;
+		}
+	}
+
+	> section.window-content {
+		background-image: none;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+		padding: 0px;
+
+		.windows {
+			overflow: hidden;
+			/*display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr;
+			grid-column-gap: 0px;
+			grid-row-gap: 0px;*/
+
+			> .window-app {
+				background-color: transparent;
+				background-image: none;
+				box-shadow: none;
+				grid-area: 1 / 1 / 2 / 2;
+				/* OVERRIDE WINDOW POSITION */
+				height: 100% !important;
+				left: 0px !important;
+				margin: 0px;
+				position: relative !important;
+				top: 0px !important;
+				width: 100% !important;	
+
+				header.window-header {
+					display: none;
+				}
+
+				.window-resizable-handle {
+					display: none;
+				}
+
+				/* FIX DND5E.SHEET.ITEM */
+				&.dnd5e.sheet.item {
+					max-height: 100%;
+				}
+			}
+		}
+	}
+
+	.window-resizable-handle {
+		z-index: 200;
+	}
+
+	/* Add Support for Minimized Windows */
+	&.minimized {
+		height: 30px !important;
+
+		> header.window-header {
+			flex: 0 0 30px;
+
+			h4.window-title {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			a.header-button.maximize {
+				display: none !important;
+			}
+		}
+	}
+
+	/* Add Support for Maximized Windows */
+	&.maximized:not(.minimized) {
+		border-radius: 0px;
+		height: 100vw !important;
+		left: 0px !important;
+		margin: 0;
+		width: calc(100vw - var(--sidebar-width) - 10px) !important;
+		top: 0px !important;
+
+		> header.window-header a.header-button {
+			&.maximize i:before {
+				content: "\f2d2";
+			}
+
+			&.close:hover {
+				border-radius: 0px;
+			}
+		}
+
+		.window-resizable-handle {
+			display: none !important;
+		}
+	}
+
+	/* Add Support for Clean Header Buttons */
+	&.clean-header-buttons {
+		> header.window-header {
+			padding-right: 0px;
+
+			a.header-button {
+				align-items: center;
+				display: flex;
+				height: 30px;
+				justify-content: center;
+				margin: 0px;
+				min-width: 40px;
+				padding: 0 0.5rem;
+				text-align: center;
+			}
+			a.header-button:has(i) {
+				font-size: 0rem;
+				padding: 0 ;
+	
+				i {
+					font-size: var(--font-size-14);
+					margin: 0px;
+				}
+			}
+			a.header-button:hover {
+				background-color: rgba(255 255 255 / 5%);
+				text-shadow: none;
+			}
+			a.header-button.close:hover {
+				background-color: rgb(196, 43, 28);
+				border-top-right-radius: 5px;
+			}
+		}
+	}
+}
+
+body:has(#sidebar.collapsed) {
+	.window-tabs-app.maximized {
+		--sidebar-width: 32px;
+	}
+}
+
+/* Allow Maximize Button */
+.window-tabs-app > header.window-header a.header-button.maximize {
+	display: none;
+}
+.window-tabs-allow-maximize {
+	.window-tabs-app > header.window-header a.header-button.maximize {
+		display: flex;
+	}
+}
+
+/* Add Dock Support */
+.window-tabs-dock-when-minimized {
+	.window-tabs-app.minimized {
+		&[data-minimized] {
+			top: calc(100vh - var(--macro-size) - 20px - 30px) !important;
+			left: calc(var(--players-width) + 30px) !important;
+			width: 100% !important;
+			max-width: min(200px, var(--window-tabs-minimize-size));
+			min-width: min(200px, var(--window-tabs-minimize-size)) !important;
+			min-height: 30px !important;
+			/*max-width: min(200px, (100vw - var(--players-width) - var(--sidebar-width)) / 8);*/
+		}
+
+		$players-width: 200px; // Set your desired players width
+		$margin-between: 0px; // Set your desired margin between elements
+
+		@for $i from 1 through 100 {
+			&[data-minimized="#{$i}"] {
+				left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (#{$i} - 1)) !important;
+			}
+		}
+	}
 }
