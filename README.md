@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/mouse0270/window-tabs">
-    <img src="https://github.com/mouse0270/window-tabs/assets/564874/6b02fc05-9d22-483f-95b4-ef6e2ce13c34" alt="Logo" width="80" height="80">
+    <img src="https://github.com/mouse0270/window-tabs/assets/564874/6b02fc05-9d22-483f-95b4-ef6e2ce13c34" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">Window Tabs</h3>
@@ -25,6 +25,8 @@
 	<ol>
 		<li><a href="#about-the-Module">About the Module</a></li>
 		<li><a href="#supported-Modules--Systems">Supported Modules / Systems</a></li>
+		<li><a href="#get-rekt">Get Rekt</a></li>
+		<li><a href="#API">API</a></li>
 		<li><a href="#license">License</a></li>
 		<li><a href="#acknowledgments">Acknowledgments</a></li>
 	</ol>
@@ -49,7 +51,7 @@ Window Tabs is a powerful module designed to enhance the user experience of Foun
 Should work with most modules and systems. However, systems or modules with heavy theming may cause graphical issues. If so just let me know and I will try to fix it.
 
 ## Get Rekt
-- [ ] [Window Controls](https://foundryvtt.com/packages/window-controls) Does not work with this module. I tried to add support, but given how super janky way I handle windows, it just didn't really work out. Sorry.
+- [ ] [Window Controls](https://foundryvtt.com/packages/window-controls) Does not work with this module. I tried to add support, but given the super janky way I handle windows, it just didn't really work out. Sorry.
 - [ ] [Taskbar](https://theripper93.com/module/foundry-taskbar) Does not work with this module. I tried to add support, but once again, I am handling the windows in a super janky way, so it didnt work out. Sorry.
 
 
