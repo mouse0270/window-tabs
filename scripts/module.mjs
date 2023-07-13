@@ -370,6 +370,9 @@ export default class CORE {
 		// Check if there are any active windows
 		if (windowTab.querySelectorAll('.windows > div').length == 1) ui.windows[windowTab.dataset.appid]?.close();
 
+		// Make sure its closed
+		if (windowTab.querySelector(`a.window-tabs--tab[data-appid="${sheetApp.appId}"]`)) windowTab.querySelector(`a[data-appid="${sheetApp.appId}"] .close`).click();
+
 		// Check if Window Tab has Active Tab
 		let activeTab = windowTab.querySelector('.window-tabs--tab.active');
 		if (activeTab) return;

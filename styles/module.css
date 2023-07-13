@@ -510,3 +510,11 @@ body:has(#sidebar.collapsed) .window-tabs-app.maximized {
 .window-tabs-dock-when-minimized .window-tabs-app.minimized[data-minimized="100"] {
   left: calc(var(--players-width) + 30px + min(200px, var(--window-tabs-minimize-size)) * (100 - 1)) !important;
 }
+
+/* FIXES */
+/* Fix for Prototype Tokens */
+.window-tabs-app .windows .sheet.token-sheet nav.sheet-tabs {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1;
+          flex: 0 1;
+}

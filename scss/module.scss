@@ -241,3 +241,12 @@ body:has(#sidebar.collapsed) {
 		}
 	}
 }
+
+
+/* FIXES */
+/* Fix for Prototype Tokens */
+.window-tabs-app .windows {
+	.sheet.token-sheet nav.sheet-tabs {
+		flex: 0 1;
+	}
+}
