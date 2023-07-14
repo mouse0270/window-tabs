@@ -75,16 +75,17 @@
 
 	> section.window-content {
 		background-image: none;
-		display: grid;
+		/*display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr;
 		grid-column-gap: 0px;
-		grid-row-gap: 0px;
+		grid-row-gap: 0px;*/
 		padding: 0px;
 
 		.windows {
-			overflow: hidden;
-			/*display: grid;
+			position: relative;
+			/*overflow: hidden;
+			display: grid;
 			grid-template-columns: 1fr;
 			grid-template-rows: 1fr;
 			grid-column-gap: 0px;
@@ -240,6 +241,11 @@ body:has(#sidebar.collapsed) {
 			}
 		}
 	}
+}
+
+/* SVELTE SUPPORT */
+.window-tabs-app .windows .window-app {
+	transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1) !important;
 }
 
 

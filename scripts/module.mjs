@@ -101,6 +101,11 @@ class WindowTabs extends Application {
 		// Preform Maximize
 		super.maximize();
 	}
+
+	_onResize(event) {
+		// If user Resized window, set resized to true
+		this.options.resized = true;
+	}
 }
 
 // DEFINE MODULE CLASS
@@ -139,28 +144,6 @@ export default class CORE {
 
 	static init = () => {
 		this.installAPI();
-	}
-
-	static getMinSize = (windowTabApp, sheetApp) => {
-		// Get Sheet and WindowTab Styles
-		const sheetStyles = window.getComputedStyle(sheetApp.element[0]);
-		const windowTabStyles = window.getComputedStyle(windowTabApp.element[0]);
-		const windowTabHeaderHeight = parseInt(windowTabApp.element[0].querySelector('.window-header').offsetHeight) ?? 0;
-
-		// Get Sheet Sizes
-		const sheetSizes  = {
-			width: parseInt(sheetStyles.getPropertyValue('min-width')) ?? 0,
-			height: parseInt(sheetStyles.getPropertyValue('min-height')) ?? 0,
-		}
-		// Get Window Sizes
-		const windowTabSizes  = {
-			width: parseInt(windowTabStyles.getPropertyValue('min-width')) ?? 0,
-			height: parseInt(windowTabStyles.getPropertyValue('min-height')) ?? 0,
-		}
-
-		// If windows is larger than current min size, set new min size
-		if (sheetSizes.width > windowTabSizes.width) windowTabApp.element[0].style.minWidth = sheetSizes.width + 'px';
-		if (sheetSizes.height > windowTabSizes.height) windowTabApp.element[0].style.minHeight = (sheetSizes.height + windowTabHeaderHeight) + 'px';
 	}
 
 	static updateHeaderButtons = (windowTabApp, buttons) => {
@@ -245,7 +228,9 @@ export default class CORE {
 		CORE.createHeaderToggleTab(windowTabApp, sheetApp);
 
 		// Update Min Size
-		CORE.getMinSize(windowTabApp, sheetApp);
+		//CORE.getMinSize(windowTabApp, sheetApp);
+		MODULE.debug(`Set Position:`, windowTabApp?.options?.resized, windowTabApp?.position?.height, sheetApp?.options?.height ?? 'auto', 'Using', windowTabApp?.options?.resize ? windowTabApp?.position?.height : sheetApp?.options?.height ?? 'auto')
+		setTimeout(() => windowTabApp.setPosition({ height: windowTabApp?.options?.resized ? windowTabApp?.position?.height : sheetApp?.options?.height ?? 'auto' }), 1);
 	}
 
 	static handleCustomGroups = async (sheetApp) => {
@@ -299,7 +284,10 @@ export default class CORE {
 		if (collectionName === 'actors' && doc?.type) collectionName = `actors-${doc.type}`;
 
 		// Handle if Collection is a Token
+		// Is sheetApp a Token, and is that Tokens actorLink False
 		if (sheetApp?.token && !sheetApp?.token?.actorLink && sheetApp?.token?.parentCollection) collectionName = `token-${sheetApp?.token?.parentCollection}`;
+
+		MODULE.log(`Collection Name:`, collectionName, sheetApp);
 
 		// Return Collection Name		
 		return collectionName;
@@ -368,7 +356,14 @@ export default class CORE {
 		}
 	}
 
-	static closeSheet = async (sheetApp, [elem]) => {
+	static closeSheet = async (sheetApp, html) => {
+		// Because Svelte returns an HTMLElement instead of a jQuery object or Array of Elements
+		// ! html?.[0] is a workaround for getting the HTMLElement from a jQuery Object [Assuming Core Foundry Application]
+		// ! ?? if workaround fails, then attempt to get HTMLElement from html [Assuming Svelte Foundry Application]
+		// ! ?? otherwise return null and exist function [Get Rekt - No Idea What is Happening]
+		const elem = html?.[0] ?? html ?? null;
+		if (!elem) return;
+
 		// Check if elem is in a Window Tab
 		let windowTab = elem?.closest('.window-tabs-app') ?? null;
 		if (!windowTab) return;
@@ -378,6 +373,7 @@ export default class CORE {
 
 		// Make sure its closed
 		if (windowTab.querySelector(`a.window-tabs--tab[data-appid="${sheetApp.appId}"]`)) windowTab.querySelector(`a[data-appid="${sheetApp.appId}"] .close`).click();
+
 
 		// Check if Window Tab has Active Tab
 		let activeTab = windowTab.querySelector('.window-tabs--tab.active');
@@ -390,6 +386,11 @@ export default class CORE {
 		if (!prevTab) return; 
 
 		let appId = prevTab.dataset.appid;
+		
+		// Update Min/Max Size when a Tab Closes
+		const windowTabApp = ui.windows[windowTab.dataset.appid];
+		const activeApp = ui.windows[appId];
+		setTimeout(() => windowTabApp.setPosition({ height: windowTabApp?.options?.resized ? windowTabApp?.position?.height : activeApp?.options?.height ?? 'auto' }), 50);
 
 		// Click previous Tab
 		if (windowTab.querySelector(`[data-appid="${appId}"]`)) windowTab.querySelector(`[data-appid="${appId}"]`).click();
