@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/mouse0270/window-tabs">
-    <img src="https://github.com/mouse0270/window-tabs/assets/564874/6b02fc05-9d22-483f-95b4-ef6e2ce13c34" alt="Logo" width="160" height="160">
+    <img src="https://github.com/mouse0270/window-tabs/assets/564874/db494aea-1518-46e2-b500-dbbfdc09f19a" alt="Logo" width="160" height="160">
   </a>
 
   <h3 align="center">Window Tabs</h3>
@@ -34,7 +34,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Module
-![image](https://github.com/mouse0270/window-tabs/assets/564874/d2e54efb-d6c2-4969-8b31-aa0636e4a175)
+![image](https://github.com/mouse0270/window-tabs/assets/564874/8d46c7dd-cf91-4bc6-8fd6-aad9f36b577f)
 
 Window Tabs Keeps your windows in Foundry VTT grouped and organized. Easily Grouping open windows with a tab experience.
 
