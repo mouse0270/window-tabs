@@ -1,6 +1,4 @@
 # Version 1.0.0 - Everything is Better Together
-![image](https://github.com/mouse0270/window-tabs/assets/564874/d2e54efb-d6c2-4969-8b31-aa0636e4a175)
-
 Window Tabs Keeps your windows in Foundry VTT grouped and organized. Easily Grouping open windows with a tab experiance.
 
 ### Key Features
