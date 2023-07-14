@@ -36,13 +36,12 @@
 ## About The Module
 ![image](https://github.com/mouse0270/window-tabs/assets/564874/d2e54efb-d6c2-4969-8b31-aa0636e4a175)
 
-Window Tabs is a powerful module designed to enhance the user experience of Foundry VTT by providing a convenient way to group and organize windows into tabs. With this module, users can easily manage the clutter on their Foundry VTT interface and improve their workflow.
+Window Tabs Keeps your windows in Foundry VTT grouped and organized. Easily Grouping open windows with a tab experiance.
 
 ### Key Features
-- Your Windows in Tabs... Yeah, thats pretty much the whole thing.
-- Allow users to maximize and minimize windows quickly and easily.
-- Setting to allow you to dock minimize windows above the hotbar.
-
+- Adds Tabs to nearly any window in Foundry VTT. Making it simple to organize open windows by adding tabs to the frame of the window app.
+- Automatic Grouping keeps all of your windows of the same type together. For example, all of your actors will be grouped together, all of your items will be grouped together, etc.
+- Maxmize, Minimize and Dock you Windows. Easily maximize your windows to take up the entire screen, minimize and dock them above hotbar.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
