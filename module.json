@@ -1,7 +1,7 @@
 {
 	"id": "window-tabs",
 	"title": "Window Tabs",
-	"description": "MODULE DESCRIPTION",
+	"description": "Window Tabs Keeps your windows in Foundry VTT grouped and organized. Easily Grouping open windows with a tab experience. Automatic Grouping keeps all of your content together for you. Also Provides a lightweight Maximize and Minimize to Dock Feature.",
 	"version": "1.0.0",
 	"compatibility": {
 		"minimum": 10,
