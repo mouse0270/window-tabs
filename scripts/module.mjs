@@ -6,8 +6,6 @@ import { MODULE } from './_module.mjs';
 // IMPORT SETTINGS -> Settings Register on Hooks.Setup
 import './_settings.mjs';
 
-
-
 class WindowTabs extends Application {
 	constructor(options = {}) {
 		super(options);
@@ -126,6 +124,14 @@ export default class CORE {
 				add: (excludeType) => this.#excludeTypes.push(excludeType),
 				remove: (excludeType) => this.#excludeTypes = this.#excludeTypes.filter(c => c !== excludeType),
 			},
+			register: (id, func, options = {}) => {
+				// Check if ID is in Use
+				if (this.#customGrouping.has(id)) return (ui.notifications.error(MODULE.localize('notifications.error.alreadyRegisteredID', {title: MODULE.TITLE, id})));
+
+				// Add to Custom Grouping Function
+				this.#customGrouping.set(id, func);
+			},
+			unregister: (id) => this.#customGrouping.delete(id),
 			grouping: this.#customGrouping,
 		};
 		game.modules.get(MODULE.ID).api = game.modules.get(MODULE.ID).API;

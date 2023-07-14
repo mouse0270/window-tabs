@@ -1,6 +1,6 @@
 {
 	"window-tabs": {
-		"title": "Module Template",
+		"title": "Window Tabs",
 		"settings": {
 			"cleanHeaderButtons": {
 				"name": "Simple Header Buttons",
@@ -14,6 +14,9 @@
 				"name": "Allow Maximize Button",
 				"hint": "When enabled the user will be allowed to maximize the window to take up as much space as possible. WARNING: This may cause issues with some windows."
 			}
+		},
+		"notifications.error": {
+			"alreadyRegisteredID": "<strong>{title}</strong> {id} is already registered, please contact the developer of this module to resolve this issue."
 		}
 	}
 }

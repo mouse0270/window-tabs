@@ -53,6 +53,7 @@ Should work with most modules and systems. However, systems or modules with heav
 ## Get Rekt
 - [ ] [Window Controls](https://foundryvtt.com/packages/window-controls) Does not work with this module. I tried to add support, but given the super janky way I handle windows, it just didn't really work out. Sorry.
 - [ ] [Taskbar](https://theripper93.com/module/foundry-taskbar) Does not work with this module. I tried to add support, but once again, I am handling the windows in a super janky way, so it didnt work out. Sorry.
+- [ ] [PopOut!](https://foundryvtt.com/packages/popout) Unable to select header button because of version issue. This is fixed in version 2.9+ but only version 2.14 is available on v11. Once this weird version issue is fixed, I will add support for this module.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
