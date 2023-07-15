@@ -84,11 +84,11 @@ This will unregister the custom grouping function registered above.
 You can use the API in your world scripts to register and unregister custom grouping functions. This is useful when you want to force specific windows to be grouped togerher. Lets say you want your players and companion sheets to be grouped together, but they are in different folders. You could use a would script and do something like this:
 ```javascript
 Hooks.once('setup', () => {
-	if (game.modules.get('window-tabs')?.active ?? false) {
-		game.modules.get('window-tabs').api.register(`world-script.party-override`, (sheetApp) => {
-			return ((['FKLdIWiWNOsN2vP5', 'DVIEhYEW1Wbnibdz'].includes(sheetApp?.document?.folder?.id ?? '')) ? 'party-overide' : false);
-		});
-	}
+  if (game.modules.get('window-tabs')?.active ?? false) {
+    game.modules.get('window-tabs').api.register(`world-script.party-override`, (sheetApp) => {
+      return ((['FKLdIWiWNOsN2vP5', 'DVIEhYEW1Wbnibdz'].includes(sheetApp?.document?.folder?.id ?? '')) ? 'party-overide' : false);
+    });
+  }
 })
 ```
 This will check if the sheetApp that is being opening is contained in either the Player Folder (ID: FKLdIWiWNOsN2vP5) or Companion Folder (ID: DVIEhYEW1Wbnibdz) and give it the group id `party-override` so that these sheets will be grouped together even though they noramlly wouldn't be.
