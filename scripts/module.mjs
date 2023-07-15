@@ -239,7 +239,7 @@ export default class CORE {
 		// Loop through custom groups functions and run them
 		for (let [moduleId, func] of game.modules.get(MODULE.ID).API.grouping) {
 			let result = await func(sheetApp);
-			if (result) collectionName = result;
+			if (typeof result === 'string') collectionName = result;
 		}
 
 		return collectionName;
@@ -286,6 +286,9 @@ export default class CORE {
 		// Handle if Collection is a Token
 		// Is sheetApp a Token, and is that Tokens actorLink False
 		if (sheetApp?.token && !sheetApp?.token?.actorLink && sheetApp?.token?.parentCollection) collectionName = `token-${sheetApp?.token?.parentCollection}`;
+
+		// Allow Custom Function to Override Collection Name if Custom Function is set to an empty string
+		if (typeof customCollectionName === 'string' && customCollectionName === '') collectionName = false;
 
 		MODULE.log(`Collection Name:`, collectionName, sheetApp);
 

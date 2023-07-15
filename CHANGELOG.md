@@ -1,3 +1,18 @@
+# Version 1.0.1 - Do you even exist if your empty inside?
+- Added the ability to filter out grouping via a custom function if you set the custom grouping return to an empty string like `""`
+- If system is **pf2e** and the window app is **pf2e-effects-panel** will be excluded from grouping.
+
+### Example of Excluding Grouping Using Empty String
+```javascript
+Hooks.once('setup', () => {
+	if (game.system.id === 'pf2e') {
+		game.modules.get('window-tabs').api.register(`window-tabs.pf2e`, (sheetApp) => {
+			if (sheetApp?.id === 'pf2e-effects-panel') return '';
+		});
+	}
+})
+```
+
 # Version 1.0.0 - Everything is Better Together
 Window Tabs Keeps your windows in Foundry VTT grouped and organized. Easily Grouping open windows with a tab experience.
 

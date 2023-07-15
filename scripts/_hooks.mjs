@@ -23,6 +23,13 @@ Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
 // System/Module Compatibility
 /* ─────────────── ⋆⋅☆⋅⋆ ─────────────── */
 Hooks.once('setup', () => {
+	// Add Support for PF2E Effects Module
+	if (game.system.id === 'pf2e') {
+		game.modules.get('window-tabs').api.register(`${MODULE.ID}.${game.system.id}`, (sheetApp) => {
+			if (sheetApp?.id === 'pf2e-effects-panel') return '';
+		});
+	}
+	
 	// Add Support for Item Piles Module
 	if (game.modules.get('item-piles')?.active ?? false) {
 		game.modules.get('window-tabs').api.register(`${MODULE.ID}.item-piles`, (sheetApp) => {
