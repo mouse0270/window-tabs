@@ -1,3 +1,6 @@
+# Version 1.0.2 - I don't even play Pathfinder?!?!?
+- Fixed some small theme issues to make the UI feel more like PF2e Dorako UI when using that UI Module
+
 # Version 1.0.1 - Do you even exist if your empty inside?
 - Added the ability to filter out grouping via a custom function if you set the custom grouping return to an empty string like `""`
 - If system is **pf2e** and the window app is **pf2e-effects-panel** will be excluded from grouping.

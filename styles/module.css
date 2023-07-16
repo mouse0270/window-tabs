@@ -518,6 +518,56 @@ body:has(#sidebar.collapsed) .window-tabs-app.maximized {
           transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1) !important;
 }
 
+/* PATCH FOR PF2e Dorako UI */
+.window-tabs-app.dorako-ui > header.window-header .window-tabs {
+  height: 35px;
+  padding-top: 5px;
+}
+.window-tabs-app.dorako-ui > header.window-header .window-tabs a.window-tabs--tab {
+  background-color: var(--secondary-dark);
+  border-radius: 3px 3px 0 0;
+  -webkit-box-shadow: var(--glassy);
+          box-shadow: var(--glassy);
+  color: var(--color-text-light-heading);
+  margin: 0px 3px;
+}
+.window-tabs-app.dorako-ui > header.window-header .window-tabs a.window-tabs--tab:hover {
+  color: var(--color-text-light-highlight);
+  background-color: var(--secondary-light);
+}
+.window-tabs-app.dorako-ui > header.window-header .window-tabs a.window-tabs--tab.active {
+  color: var(--color-text-light-highlight);
+  background-color: var(--secondary-light);
+  -webkit-box-shadow: var(--gold-and-glow), var(--glassy);
+          box-shadow: var(--gold-and-glow), var(--glassy);
+}
+.window-tabs-app.dorako-ui.plain > header.window-header .window-tabs a.window-tabs--tab {
+  background-color: var(--glass-bg);
+  border-radius: 3px 3px 0 0;
+  -webkit-box-shadow: var(--glassy);
+          box-shadow: var(--glassy);
+  color: var(--color-text-light-heading);
+  margin: 0px 3px;
+}
+.window-tabs-app.dorako-ui.plain > header.window-header .window-tabs a.window-tabs--tab:hover {
+  background-color: var(--primary);
+  color: var(--color-text-light-highlight);
+}
+.window-tabs-app.dorako-ui.plain > header.window-header .window-tabs a.window-tabs--tab.active {
+  color: var(--color-text-light-highlight);
+  background-color: var(--secondary-light);
+  -webkit-box-shadow: var(--gold-and-glow), var(--glassy);
+          box-shadow: var(--gold-and-glow), var(--glassy);
+}
+.window-tabs-app.dorako-ui.dark-theme:not(.premium).window-app > .window-content {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: 0px;
+}
+.window-tabs-app.dorako-ui.dark-theme:not(.premium).window-app > .window-content .window-content {
+  margin: 0px;
+}
+
 /* FIXES */
 /* Fix for Prototype Tokens */
 .window-tabs-app .windows .sheet.token-sheet nav.sheet-tabs {
