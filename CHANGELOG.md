@@ -1,5 +1,6 @@
 # Version 1.0.2 - I don't even play Pathfinder?!?!?
 - Fixed some small theme issues to make the UI feel more like PF2e Dorako UI when using that UI Module
+- Added overflow optiosn to tabs, to fix issues with scrollbars. May cause issues with themes or windows that place content outside of the window. Please let me know of any issues you fine.
 
 # Version 1.0.1 - Do you even exist if your empty inside?
 - Added the ability to filter out grouping via a custom function if you set the custom grouping return to an empty string like `""`

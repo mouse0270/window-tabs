@@ -82,6 +82,7 @@
   padding: 0px;
 }
 .window-tabs-app > section.window-content .windows {
+  overflow: hidden auto;
   position: relative;
   /*overflow: hidden;
   display: grid;
