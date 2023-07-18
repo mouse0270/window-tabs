@@ -1,4 +1,5 @@
 // GET REQUIRED LIBRARIES
+import Sortable from './lib/sortable.core.esm.js';
 
 // GET MODULE CORE
 import { MODULE } from './_module.mjs';
@@ -53,6 +54,110 @@ class WindowTabs extends Application {
 
 			// Update Scroll Position
 			elemApp.querySelector('.window-header .window-tabs').scrollLeft += event.deltaY;
+		});
+
+		elemApp.querySelector('.window-header .window-tabs').addEventListener('pointerdown', event => event.stopPropagation());
+
+		// Reusable Functions for Sortable Tabs
+		const onSortable = {
+			onDefineGroup: (event) => {
+				// Get Window Content
+				const toWindowApp = ui.windows[event.to.closest('.window-tabs-app').dataset.appid];
+				const sheetApp = ui.windows[event.item.dataset.appid];
+				let group = { [sheetApp.id]: toWindowApp.id.replace('window-tabs-', '') }
+
+				MODULE.log('Define Group', event, toWindowApp, sheetApp);
+
+				if (game.user.isGM && event.originalEvent.altKey) {
+					// Update World Defined Groups
+					MODULE.setting('worldDefinedGroups', mergeObject(MODULE.setting('worldDefinedGroups'), group, { inplace: false }));
+				} else {
+					// Update World Defined Groups
+					MODULE.setting('clientDefinedGroups', mergeObject(MODULE.setting('clientDefinedGroups'), { [game.world.id]: group }, { inplace: false }));
+				}
+			},
+			dragOver: (event) => {
+				// If not a window tab - return
+				if (!event.target.closest('.window-tabs-app')) return;
+
+				// Only if hovering over the header of the element
+				if (!event.target.closest('header.window-header')) return;
+				
+				// Get Active Window App and Hovered Window App
+				const activeWindow = ui.activeWindow;
+				const hoveredWindow = ui.windows[event.target.closest('.window-tabs-app').dataset.appid];
+	
+				// Window is already in Focus - return
+				if (activeWindow.appId === hoveredWindow.appId) return;
+				
+				// Bring Window to Top
+				hoveredWindow.bringToTop();
+			},
+			onAdd: (event) => {
+				// Get Window Apps
+				const fromWindowApp = event.from.closest('.window-tabs-app');
+				const toWindowApp = event.to.closest('.window-tabs-app');
+				const windowTab = event.item;
+				const windowApp = fromWindowApp.querySelector(`.window-content .windows .window-app[data-appid="${windowTab.dataset.appid}"]`);
+
+				// Move Window App to new Window
+				toWindowApp.querySelector('.window-content .windows').appendChild(windowApp);
+
+				// Activate new Window App
+				windowTab.click();
+
+				// If ctrl is being held, update user defined groups
+				if (event.originalEvent.ctrlKey) onSortable.onDefineGroup(event);
+			},
+			onRemove: (event) => {
+				const windowTab = event.item;
+				const fromWindowApp = event.from.closest('.window-tabs-app');
+				const windowTabApp = ui.windows[fromWindowApp.dataset.appid];
+				const tabs = fromWindowApp.querySelectorAll('.window-tabs .window-tabs--tab');
+
+				// If there are no more tabs - Close fromWindowApp
+				if (fromWindowApp.querySelectorAll('.window-tabs .window-tabs--tab').length === 0) return (windowTabApp.close() ?? false);
+
+				// If the tab being removed is active - Activate the next tab
+				if (windowTab.classList.contains('active')) tabs[event.oldIndex == 0 ? tabs.length - 1 : event.oldIndex - 1].click();
+			}
+		}
+
+		new Sortable(elemApp.querySelector('.window-header .window-tabs'), {
+			group: 'shared',
+			animation: 150,
+			draggable: '.window-tabs--tab',
+			direction: 'vertical',
+			// Element dragging started
+			onStart: function (event) {
+				document.body.addEventListener('dragover', onSortable.dragOver);
+			},
+			// Element dragging ended
+			onEnd: function (event) {
+				document.body.removeEventListener('dragover', onSortable.dragOver);
+
+				// Check if elemen was dropped on a new header
+				const fromWindowApp = event.from.closest('.window-tabs-app');
+				const toWindowApp = event.to.closest('.window-tabs-app');
+				const dropWindowApp = event.originalEvent.target.closest('.window-tabs-app');
+
+				// If dropped on the same header - return
+				if (toWindowApp.dataset?.appid == dropWindowApp.dataset?.appid) return;
+
+				// Update event.to to the original target
+				event.to = dropWindowApp;
+
+				// Add event.item to event.to window-tabs
+				event.to.querySelector('.window-tabs').appendChild(event.item);
+
+				// Call onAdd and onRemove
+				onSortable.onAdd(event);
+				onSortable.onRemove(event);
+			},
+			// Element is dropped into the list from another list
+			onAdd: onSortable.onAdd,
+			// Element is removed from the list into another list
+			onRemove: onSortable.onRemove,
 		});
 	}
 
@@ -113,7 +218,7 @@ export default class CORE {
 	// DEFINE MODULE DATA
 	static #configTypes = [SettingsConfig, KeybindingsConfig, ModuleManagement, WorldConfig, ToursManagement, SupportDetails];
 	static #excludeTypes = [FolderConfig, PlaylistConfig]
-	static #customGrouping = new Map();
+	static #customGrouping = new Map()
 
 	static registerSocketLib = () => {}
 
@@ -175,6 +280,10 @@ export default class CORE {
 		const button = mergeObject(document.createElement('a'), {
 			innerHTML: `${sheetApp.title} <a class="close"><i class="fas fa-times"></i></a>`,
 			onclick: (event) =>  {
+				// get WindowTabApp
+				const windowTabApp = ui.windows[sheetApp.element[0].closest('.window-tabs-app').dataset.appid];
+				MODULE.log(windowTabApp, sheetApp.element[0])
+
 				if (event.target.closest('a.close') ?? false ) {
 					event.target.closest('.window-tabs--tab').remove();
 					sheetApp.close();
@@ -191,6 +300,13 @@ export default class CORE {
 
 				// Update Header Text
 				windowTabApp.element[0].querySelector('.window-header h4.window-title').textContent = sheetApp.title;
+			},
+			onmouseenter: (event) => {
+				const elem = event.target.closest('a.window-tabs--tab');
+				const hasEllipsis =  elem.scrollWidth > elem.clientWidth;
+				
+				elem?.[hasEllipsis ? 'setAttribute' : 'removeAttribute']('data-tooltip', elem.textContent);
+				game.tooltip?.[hasEllipsis ? 'activate' : 'deactivate'](elem);
 			}
 		});
 		// Add Default class and Active Class
@@ -252,6 +368,10 @@ export default class CORE {
 		// If FolderConfig, exclude
 		const excludeList = game.modules.get(MODULE.ID).API.excludeType.get();
 		if (typeof sheetApp === 'object' && excludeList.some(cls => sheetApp instanceof cls)) return;
+
+		// Check if Sheet App has User Defined Group
+		const worldDefinedGroups = mergeObject(MODULE.setting('worldDefinedGroups'), MODULE.setting('clientDefinedGroups')?.[game.world.id] ?? {}, { inplace: false });
+		if (worldDefinedGroups.hasOwnProperty(sheetApp.id)) return worldDefinedGroups[sheetApp.id];
 
 		// Define Config Windows
 		const isConfigMenu = game.modules.get(MODULE.ID).API.configType.get();

@@ -1,3 +1,7 @@
+:root {
+	--window-tabs-min-tab-width: 100px;
+}
+
 .window-tabs-app {
 	> header.window-header {
 		flex: 0 0 60px;
@@ -28,8 +32,9 @@
 
 			a.window-tabs--tab {
 				cursor: pointer;
-				flex: 1 0 auto; /* Allow resizing of tabs */
+				flex: 0 1 auto; /* Allow resizing of tabs */
 				margin: 0px;
+				min-width: var(--window-tabs-min-tab-width);
 				max-width: 210px;
 				overflow: hidden;
 				padding: 0 0.75rem;
@@ -104,6 +109,7 @@
 				position: relative !important;
 				top: 0px !important;
 				width: 100% !important;	
+				z-index: 1 !important;
 
 				header.window-header {
 					display: none;

@@ -2,6 +2,10 @@
 	"window-tabs": {
 		"title": "Window Tabs",
 		"settings": {
+			"minTabWidth": {
+				"name": "Minimum Tab Width",
+				"hint": "The minimum width of a tab in pixels. This is used to prevent tabs from becoming too small to read."
+			},
 			"cleanHeaderButtons": {
 				"name": "Simple Header Buttons",
 				"hint": "Remove text from header buttons when possible to provide a cleaner look."

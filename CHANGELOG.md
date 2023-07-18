@@ -1,3 +1,13 @@
+# Version 1.1.0 - Dragging me Through the Mud and Back Again...
+- Added setting to define minimum width of tabs. You can use this so that you can have more tabs visible and are okay with them being smaller, or you can set it to the max to keep bigger tabs.
+  - The default has been set to 100px, 60px at their smallest and the max is 210px
+- Added the ability to drag tabs around in the header bar.
+- Added the ability to drag tabs between windows.
+  - Holding `ctrl` when dropping the tab on a new window will tell the window to always open up in this group. This setting is local to the client and world.
+  - If you are a Game Master you can hold `ctrl + alt` when dropping the tab onto a new window, this will tell the world that these windows should be opened in this group for everyone.
+
+> **NOTE** A players grouped preferences will always override a world grouped preference. If a player has a preference set for a window to always open in a group, it will always open in that group for them. If a player does not have a preference set, then the world preference will be used.
+
 # Version 1.0.2 - I don't even play Pathfinder?!?!?
 - Fixed some small theme issues to make the UI feel more like PF2e Dorako UI when using that UI Module
 - Added overflow options to tabs, to fix issues with scrollbars. May cause issues with themes or windows that place content outside of the window. Please let me know of any issues you fine.
