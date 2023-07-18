@@ -282,7 +282,6 @@ export default class CORE {
 			onclick: (event) =>  {
 				// get WindowTabApp
 				const windowTabApp = ui.windows[sheetApp.element[0].closest('.window-tabs-app').dataset.appid];
-				MODULE.log(windowTabApp, sheetApp.element[0])
 
 				if (event.target.closest('a.close') ?? false ) {
 					event.target.closest('.window-tabs--tab').remove();
