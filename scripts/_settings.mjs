@@ -34,6 +34,20 @@ Hooks.once('setup', async () => {
 		}
 	});
 
+	// Allow Dropped Tabs to Create New Windows
+	MODULE.setting('register', 'allowNewWindows', {
+		type: Boolean,
+		scope: 'client',
+		default: true
+	});
+
+	// Always Open in New Window
+	MODULE.setting('register', 'alwaysNewWindow', {
+		type: Boolean,
+		scope: 'client',
+		default: false
+	});
+
 	// This will minify the window header buttons to just icons if possible
 	MODULE.setting('register', 'cleanHeaderButtons', {
 		type: Boolean,

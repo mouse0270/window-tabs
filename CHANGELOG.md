@@ -1,3 +1,8 @@
+# Version 1.1.1 - I'm a Window, and I'll Stay Open if I Want To
+- Added a Setting to allow dropped window tabs to create new windows if dropped outside of existing windows `Default: True`.
+- Added a Setting to allow allow all windows to open in unqiue containers `Default: False`.
+- Fixed an issue, where opening a window that has a parent and then dragging it to a new window and opening it again caused it to open in the parent again.
+
 # Version 1.1.0 - Dragging me Through the Mud and Back Again...
 - Added setting to define minimum width of tabs. You can use this so that you can have more tabs visible and are okay with them being smaller, or you can set it to the max to keep bigger tabs.
   - The default has been set to 100px, 60px at their smallest and the max is 210px

@@ -6,6 +6,14 @@
 				"name": "Minimum Tab Width",
 				"hint": "The minimum width of a tab in pixels. This is used to prevent tabs from becoming too small to read."
 			},
+			"allowNewWindows": {
+				"name": "Allow New Windows",
+				"hint": "Allow new windows to be created when the tab is dropped outside of a defined windows tabs."
+			},
+			"alwaysNewWindow": {
+				"name": "Always New Window",
+				"hint": "Always create a new window instead of attempting to auto-group with other windows. Will be overridden by User Defined Groups."
+			},
 			"cleanHeaderButtons": {
 				"name": "Simple Header Buttons",
 				"hint": "Remove text from header buttons when possible to provide a cleaner look."

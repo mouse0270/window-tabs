@@ -133,16 +133,56 @@ class WindowTabs extends Application {
 				document.body.addEventListener('dragover', onSortable.dragOver);
 			},
 			// Element dragging ended
-			onEnd: function (event) {
+			onEnd: async function (event) {
 				document.body.removeEventListener('dragover', onSortable.dragOver);
 
 				// Check if elemen was dropped on a new header
 				const fromWindowApp = event.from.closest('.window-tabs-app');
 				const toWindowApp = event.to.closest('.window-tabs-app');
-				const dropWindowApp = event.originalEvent.target.closest('.window-tabs-app');
+				let dropWindowApp = event.originalEvent.target.closest('.window-tabs-app');
+				const currentTabs = fromWindowApp.querySelectorAll('.window-tabs--tab');
+
+				MODULE.debug('Dropped Windop App', event, fromWindowApp, toWindowApp, dropWindowApp);
+
+				// If Creating New Window is Disabled - Return
+				if (!dropWindowApp && !MODULE.setting('allowNewWindows')) return;
+				// Otherwise Create window and then continue
+				else if (!dropWindowApp && MODULE.setting('allowNewWindows')) {
+					// Create New Window
+					let newWindowId = randomID();
+					let uiWindowFrom = ui.windows[fromWindowApp.dataset.appid];
+					dropWindowApp = await new WindowTabs({
+						id: `window-tabs-${newWindowId}`,
+						template: `modules/${MODULE.ID}/templates/window-tabs.hbs`,
+						classes: ['window-tabs-app', `${MODULE.setting('cleanHeaderButtons') ? 'clean-header-buttons' : ''}`],
+						resizable: true,
+						height: uiWindowFrom.position.height,
+						width: uiWindowFrom.position.width,
+					}).render(true);
+
+					Hooks.once('renderWindowTabs', async(windowTabApp, [elem], data) => {
+						dropWindowApp.setPosition({ 
+							height: uiWindowFrom.position.height,
+							top: event.originalEvent.clientY,
+							left: event.originalEvent.clientX,
+						});
+
+						// Update event.to to the original target
+						event.to = dropWindowApp.element[0];
+
+						// Add event.item to event.to window-tabs
+						event.to.querySelector('.window-tabs').appendChild(event.item);
+		
+						// Call onAdd and onRemove
+						onSortable.onAdd(event);
+						onSortable.onRemove(event);
+					});
+
+					return;
+				}
 
 				// If dropped on the same header - return
-				if (toWindowApp.dataset?.appid == dropWindowApp.dataset?.appid) return;
+				if (toWindowApp?.dataset?.appid == dropWindowApp?.dataset?.appid) return;
 
 				// Update event.to to the original target
 				event.to = dropWindowApp;
@@ -369,8 +409,8 @@ export default class CORE {
 		if (typeof sheetApp === 'object' && excludeList.some(cls => sheetApp instanceof cls)) return;
 
 		// Check if Sheet App has User Defined Group
-		const worldDefinedGroups = mergeObject(MODULE.setting('worldDefinedGroups'), MODULE.setting('clientDefinedGroups')?.[game.world.id] ?? {}, { inplace: false });
-		if (worldDefinedGroups.hasOwnProperty(sheetApp.id)) return worldDefinedGroups[sheetApp.id];
+		const definedGroups = mergeObject(MODULE.setting('worldDefinedGroups'), MODULE.setting('clientDefinedGroups')?.[game.world.id] ?? {}, { inplace: false });
+		if (definedGroups.hasOwnProperty(sheetApp.id)) return definedGroups[sheetApp.id];
 
 		// Define Config Windows
 		const isConfigMenu = game.modules.get(MODULE.ID).API.configType.get();
@@ -409,6 +449,9 @@ export default class CORE {
 		// Allow Custom Function to Override Collection Name if Custom Function is set to an empty string
 		if (typeof customCollectionName === 'string' && customCollectionName === '') collectionName = false;
 
+		// Check if Sheet is Already Grouped
+		if (document.querySelector(`.window-tabs-app a[data-appid="${sheetApp.appId}"]`)) collectionName = document.querySelector(`.window-tabs-app a[data-appid="${sheetApp.appId}"]`).closest('.window-tabs-app').id.replace(`${MODULE.ID}-`, '');
+
 		MODULE.log(`Collection Name:`, collectionName, sheetApp);
 
 		// Return Collection Name		
@@ -420,6 +463,12 @@ export default class CORE {
 		let collectionName = await CORE.getCollectionName(sheetApp);
 		if (!collectionName) return;
 		MODULE.debug(`Render Sheet`, sheetApp, collectionName);
+
+		// If Always New Window is Enabled, then create a new window
+		if (MODULE.setting('alwaysNewWindow')) {
+			const definedGroups = mergeObject(MODULE.setting('worldDefinedGroups'), MODULE.setting('clientDefinedGroups')?.[game.world.id] ?? {}, { inplace: false });
+			if (!definedGroups.hasOwnProperty(sheetApp.id)) collectionName = randomID();
+		}
 
 		// Get Window Tab App based on Collection Name
 		let windowTab = Object.entries(ui.windows).find(w => w[1].id === `window-tabs-${collectionName}`)?.[1] ?? null;
