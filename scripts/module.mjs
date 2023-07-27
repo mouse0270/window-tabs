@@ -123,6 +123,8 @@ class WindowTabs extends Application {
 			}
 		}
 
+		const constructorName = this.constructor.name;
+
 		new Sortable(elemApp.querySelector('.window-header .window-tabs'), {
 			group: 'shared',
 			animation: 150,
@@ -160,7 +162,7 @@ class WindowTabs extends Application {
 						width: uiWindowFrom.position.width,
 					}).render(true);
 
-					Hooks.once('renderWindowTabs', async(windowTabApp, [elem], data) => {
+					Hooks.once(`render${constructorName}`, async(windowTabApp, [elem], data) => {
 						dropWindowApp.setPosition({ 
 							height: uiWindowFrom.position.height,
 							top: event.originalEvent.clientY,
@@ -462,21 +464,39 @@ export default class CORE {
 		// Get Collection Name
 		let collectionName = await CORE.getCollectionName(sheetApp);
 		if (!collectionName) return;
-		MODULE.debug(`Render Sheet`, sheetApp, collectionName);
+
+		// Get Elements Dataset AppId
+		// ? sheetApp.appId is not always the same as the rendered windows data-appid or ui.windows[appid]
+		// ? appId is used to indicate the window tab for window-tabs-app
+		// ! Maybe a bug in FVTT, but this is the only way to get the appid for the rendered window
+		let appId = elem.closest('[data-appid]').dataset.appid;
+
+		MODULE.debug(`Render Sheet`, sheetApp, collectionName, {
+			appId: appId,
+			sheetAppId: sheetApp.appId
+		});
 
 		// If Always New Window is Enabled, then create a new window
 		if (MODULE.setting('alwaysNewWindow')) {
+			// Check if Window has been user defined
 			const definedGroups = mergeObject(MODULE.setting('worldDefinedGroups'), MODULE.setting('clientDefinedGroups')?.[game.world.id] ?? {}, { inplace: false });
-			if (!definedGroups.hasOwnProperty(sheetApp.id)) collectionName = randomID();
+			// if appId exists, get attribute ID from ui.windows.element
+			if (ui.windows?.[appId]) collectionName = ui.windows[appId].element[0].id.replace(`${MODULE.ID}-`, '');
+			else if (!definedGroups.hasOwnProperty(sheetApp.id)) collectionName = randomID();
 		}
 
 		// Get Window Tab App based on Collection Name
 		let windowTab = Object.entries(ui.windows).find(w => w[1].id === `window-tabs-${collectionName}`)?.[1] ?? null;
 
 		// Check if Sheet is Already Grouped
-		if (windowTab && windowTab.element[0].querySelector(`[data-appid="${sheetApp.appId}"]`)) {
+		if (windowTab && windowTab.element[0].querySelector(`[data-appid="${appId}"]`)) {
+
 			// Get Tab
-			let elemTab = document.querySelector(`.window-tabs-app a[data-appid="${sheetApp.appId}"]`);
+			let elemTab = document.querySelector(`.window-tabs-app a[data-appid="${appId}"]`);
+
+			// If it couldn't find by appId, try to match if element exists in group
+			if (!elemTab) elemTab = elem.element.closest(`${MOUDE.ID}-app`);
+
 
 			// If Tab Doesn't Exist, Return
 			if (!elemTab) return;
