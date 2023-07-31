@@ -1,4 +1,4 @@
-# Version 1.1.2 - I'm a Window, and I'll Stay Open if I Want To
+# Version 1.1.2 - Wait, Whats a Monkey Patch?
 - Added a Setting to allow dropped window tabs to create new windows if dropped outside of existing windows `Default: True`.
 - Added a Setting to allow all windows to open in unique containers `Default: False`.
 - Fixed an issue, where opening a window that has a parent and then dragging it to a new window and opening it again caused it to open in the parent again.
