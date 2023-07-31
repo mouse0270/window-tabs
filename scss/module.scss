@@ -304,6 +304,10 @@ body:has(#sidebar.collapsed) {
 		}
 	}
 
+	&.window-app > .window-content {
+		background-image: none;
+	}
+
 
 	&.dark-theme:not(.premium).window-app {
 		> .window-content {
@@ -312,6 +316,10 @@ body:has(#sidebar.collapsed) {
 
 			.window-content {
 				margin: 0px;
+			}
+
+			.journal-entry-content {
+				color: var(--text-dark);
 			}
 		}
 	}

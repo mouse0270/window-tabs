@@ -566,6 +566,9 @@ body:has(#sidebar.collapsed) .window-tabs-app.maximized {
   -webkit-box-shadow: var(--gold-and-glow), var(--glassy);
           box-shadow: var(--gold-and-glow), var(--glassy);
 }
+.window-tabs-app.dorako-ui.window-app > .window-content {
+  background-image: none;
+}
 .window-tabs-app.dorako-ui.dark-theme:not(.premium).window-app > .window-content {
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -573,6 +576,9 @@ body:has(#sidebar.collapsed) .window-tabs-app.maximized {
 }
 .window-tabs-app.dorako-ui.dark-theme:not(.premium).window-app > .window-content .window-content {
   margin: 0px;
+}
+.window-tabs-app.dorako-ui.dark-theme:not(.premium).window-app > .window-content .journal-entry-content {
+  color: var(--text-dark);
 }
 
 /* FIXES */
