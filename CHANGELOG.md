@@ -4,7 +4,7 @@
 - Fixed an issue, where opening a window that has a parent and then dragging it to a new window and opening it again caused it to open in the parent again.
 - Fixed an issue with PF2e Dorako UI Dark Mode and Journal Entries.
 
-> There is a conflict between my module and Dice Tray. Dice Tray has a drop event listener on the main HTML element, which is causing the issue. I have reached out the the author of Dice Tray to resolve this issue on there end. However in the meantime I have decided to overwrite their dropHandler to resolve the issue. This is lightly tested if you experiance any issues using Dice Tray and Window Tabs. Please contact me and not the author of Dice Tray.
+> There is a conflict between my module and Dice Tray. Dice Tray has a drop event listener on the main HTML element, which is causing the issue. I have reached out the author of Dice Tray to resolve this issue on there end. However in the meantime I have decided to overwrite their dropHandler to resolve the issue. This is lightly tested if you experience any issues using Dice Tray and Window Tabs. Please contact me and not the author of Dice Tray.
 
 # Version 1.1.0 - Dragging me Through the Mud and Back Again...
 - Added setting to define minimum width of tabs. You can use this so that you can have more tabs visible and are okay with them being smaller, or you can set it to the max to keep bigger tabs.
