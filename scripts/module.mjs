@@ -313,7 +313,9 @@ export default class CORE {
 
 		// Add Data-Tooltip to all Buttons
 		windowTabApp.element[0].querySelectorAll('.window-header > a.header-button').forEach(btn => {
-			btn.dataset.tooltip = btn.innerText.trim();
+			const text = btn.innerText.trim();
+			if (text.length === 0 || text === "undefined") return;
+			btn.dataset.tooltip = text;
 		});
 	}
 
